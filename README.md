@@ -1,4 +1,8 @@
-##Plant Disease Detection by Alex Vuong and Samantha Sobhian
+## Plant Disease Detection with Neural Networks and Bayesian Uncertainty Estimation by Alex Vuong and Samantha Sobhian
+
+## This project, uses Convolutional Netural Networks and Bayesian Estimation to predict whether a Plant is healthy or if it has a disease using trainign test set dat.
+
+
 
 ## Dataset Setup
 
@@ -42,4 +46,4 @@ python download_dataset.py
 This will automatically download and extract the dataset into the project directory.
 
 
-Credit to emmarex for plantdisease dataset.
+Credit: emmarex on Raggle for plantdisease dataset.
