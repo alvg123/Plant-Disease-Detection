@@ -27,7 +27,7 @@ rinvchisq <- function(n, df, scale) {
 
 
 ```{r load-data}
-preds <- read.csv("~/Downloads/predictions.csv")
+preds <- read.csv("predictions.csv")
 head(preds)
 str(preds)
 ```
