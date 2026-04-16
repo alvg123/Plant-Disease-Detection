@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import altair as alt
 
-st.set_page_config(  page_title="CNN Plant Detection Results App", layout="wide", initial_sidebar_state="expanded")
+st.set_page_config(page_title="CNN Plant Detection Results App", layout="wide", initial_sidebar_state="expanded")
 
 st.markdown("""
     <style>
@@ -72,13 +72,45 @@ with tab2:
 
     col1, col2, col3 = st.columns(3)
 
+    
     with col1:
+        st.markdown("""
+            <style>
+            [data-testid="metric-container"] {
+                background-color: #1a1a1a;
+                padding: 15px;
+                border-radius: 10px;
+                border-left: 5px solid #27ae60;
+            }
+            </style>
+        """, unsafe_allow_html=True)
         st.metric("Accuracy:", f"{accuracy}%")
-    with col2:
-        st.metric("Correct Predictions:", correct)
-    with col3:
-        st.metric("Incorrect Predictions:", incorrect)
 
+    with col2:
+        st.markdown("""
+            <style>
+            [data-testid="metric-container"] {
+                background-color: #1a1a1a;
+                padding: 15px;
+                border-radius: 10px;
+                border-left: 5px solid #27ae60;
+            }
+            </style>
+        """, unsafe_allow_html=True)
+        st.metric("Correct Predictions:", correct)
+
+    with col3:
+        st.markdown("""
+            <style>
+            [data-testid="metric-container"] {
+                background-color: #1a1a1a;
+                padding: 15px;
+                border-radius: 10px;
+                border-left: 5px solid #c62828;
+            }
+            </style>
+        """, unsafe_allow_html=True)
+        st.metric("Incorrect Predictions:", incorrect)
     st.dataframe(df, use_container_width=True)
 
 
