@@ -1,2 +1,4 @@
-pip install kaggle
-pip install torch torchvision
+kaggle
+torch
+torchvision
+jupyter
