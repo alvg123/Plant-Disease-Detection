@@ -1,6 +1,9 @@
 ## Plant Disease Detection with Neural Networks and Bayesian Uncertainty Estimation by Alex Vuong and Samantha Sobhian
 
-## This project, uses Convolutional Netural Networks and Bayesian Estimation to predict whether a Plant is healthy or if it has a disease using trainign test set dat.
+## This project, uses Convolutional Netural Networks and Bayesian Estimation to predict whether a Plant is healthy or if it has a disease using training test set data.
+
+The CNN model consists of using a ResNet50 method with an  attention mechanism, batch normalization and pooling layer.
+For Cross Validation, we used 5 folds and got an accuracy above 90%.
 
 
 
