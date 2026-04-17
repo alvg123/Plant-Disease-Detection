@@ -125,19 +125,6 @@ plot(jitter(preds$prob),
      ylab = "Correct (0/1)",
      main = "CNN Confidence vs Accuracy",
      pch = 16,
-     cex = 0.5)
-
-abline(a = mu_post[1], b = mu_post[2], col = "red", lwd = 2)
-```
-
-
-```{r plot-jitter}
-plot(jitter(preds$prob),
-     jitter(preds$correct, amount = 0.05),
-     xlab = "CNN Confidence",
-     ylab = "Correct (0/1)",
-     main = "CNN Confidence vs Accuracy",
-     pch = 16,
      cex = 0.4)   # smaller points
 
 abline(a = mu_post[1], b = mu_post[2], col = "red", lwd = 2)
