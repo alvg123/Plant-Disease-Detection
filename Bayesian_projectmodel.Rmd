@@ -9,13 +9,13 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-```{r install-packages}
+```{r install}
 #install.packages("geoR")
 install.packages("mvnfast")
 ```
 
 
-```{r load-packages}
+```{r load}
 library(mvnfast)
 ```
 
@@ -42,7 +42,7 @@ preds$correct <- as.numeric(preds$correct)
 head(preds)
 ```
 
-```{r build-matrices}
+```{r matrices}
 # outcome variable
 y <- preds$correct
 
@@ -58,7 +58,7 @@ head(y)
 ```
 
 
-```{r ols-baseline}
+```{r ols}
 # ordinary least sqrs estimate
 w_hat <- solve(t(X) %*% X) %*% t(X) %*% y
 
@@ -109,7 +109,7 @@ apply(samples, 2, quantile, probs = c(0.025, 0.975))
 ```
 
 
-```{r plot-jitter}
+```{r plot}
 plot(jitter(preds$prob),
      jitter(preds$correct, amount = 0.05),
      xlab = "CNN Confidence",
