@@ -9,13 +9,13 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-```{r install-packages}
+```{r install}
 #install.packages("geoR")
 install.packages("mvnfast")
 ```
 
 
-```{r load-packages}
+```{r load}
 library(mvnfast)
 ```
 
@@ -42,7 +42,7 @@ preds$correct <- as.numeric(preds$correct)
 head(preds)
 ```
 
-```{r build-matrices}
+```{r matrices}
 # outcome variable
 y <- preds$correct
 
@@ -58,7 +58,7 @@ head(y)
 ```
 
 
-```{r ols-baseline}
+```{r ols}
 # ordinary least sqrs estimate
 w_hat <- solve(t(X) %*% X) %*% t(X) %*% y
 
@@ -108,30 +108,8 @@ apply(samples, 2, sd)
 apply(samples, 2, quantile, probs = c(0.025, 0.975))
 ```
 
+
 ```{r plot}
-plot(preds$prob, preds$correct,
-     xlab = "CNN Confidence",
-     ylab = "Correct (0/1)",
-     main = "CNN Confidence vs Accuracy")
-
-abline(a = mu_post[1], b = mu_post[2], col = "red", lwd = 2)
-```
-
-
-```{r plot-jitter}
-plot(jitter(preds$prob),
-     jitter(preds$correct, amount = 0.05),
-     xlab = "CNN Confidence",
-     ylab = "Correct (0/1)",
-     main = "CNN Confidence vs Accuracy",
-     pch = 16,
-     cex = 0.5)
-
-abline(a = mu_post[1], b = mu_post[2], col = "red", lwd = 2)
-```
-
-
-```{r plot-jitter}
 plot(jitter(preds$prob),
      jitter(preds$correct, amount = 0.05),
      xlab = "CNN Confidence",
@@ -143,5 +121,54 @@ plot(jitter(preds$prob),
 abline(a = mu_post[1], b = mu_post[2], col = "red", lwd = 2)
 ```
 
+```{r folds}
+run_bayesian_fold <- function(file_name) {
+  preds <- read.csv(file_name)
+  colnames(preds) <- c("true", "pred", "prob", "correct")
+  preds$correct <- as.numeric(preds$correct)
+  
+  y <- preds$correct
+  X <- cbind(1, preds$prob)
+  
+  # ols
+  #w_hat <- solve(t(X) %*% X + 1e-6 * diag(ncol(X))) %*% t(X) %*% y
+  
+  # posterior
+  lambda <- 1
+  I <- diag(ncol(X))
+  Sigma_post <- solve(t(X) %*% X + lambda * I)
+  mu_post <- Sigma_post %*% t(X) %*% y
+  
+  # posterior sampling
+  set.seed(1)
+  n_samples <- 1000
+  samples <- rmvn(n_samples, mu = as.vector(mu_post), sigma = Sigma_post)
+  
+  # summarize
+  means <- colMeans(samples)
+  sds <- apply(samples, 2, sd)
+  cis <- apply(samples, 2, quantile, probs = c(0.025, 0.975))
+  
+  list(
+    file = file_name,
+    w_hat = w_hat,
+    mu_post = mu_post,
+    means = means,
+    sds = sds,
+    cis = cis
+  )
+}
+```
 
+```{r fold-results}
+fold1_results <- run_bayesian_fold("predictions_1fold.csv")
+fold2_results <- run_bayesian_fold("predictions_2fold.csv")
+```
 
+```{r}
+fold1_results
+```
+
+```{r}
+fold2_results
+```
