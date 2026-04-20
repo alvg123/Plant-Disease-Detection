@@ -6,6 +6,8 @@ The CNN model consists of using a ResNet50 method with an  attention mechanism, 
 For Cross Validation, we used 5 folds and got an accuracy above 90%.
 
 
+Here is an app that displays the CNN results: https://alvg123-plant-disease-detection-app-g9mera.streamlit.app/
+
 
 ## Dataset Setup
 
