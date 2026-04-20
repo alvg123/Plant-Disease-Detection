@@ -24,11 +24,11 @@ st.markdown("""
 st.title("CNN Plant Detection Results Website by the glorious Alex and Sam")
 
 cross_v = pd.read_csv("Cross Validation results on 5 folds.csv")
-p1 = pd.read_csv("Predictions for 1 fold.csv")
-p2 = pd.read_csv("Predictions for 2 fold.csv")
-p3 = pd.read_csv("Predictions for 3 fold.csv")
-p4 = pd.read_csv("Predictions for 4 fold.csv")
-p5 = pd.read_csv("Predictions for 5 fold.csv")
+p1 = pd.read_csv("predictions_1fold.csv")
+p2 = pd.read_csv("predictions_2fold.csv")
+p3 = pd.read_csv("predictions_3fold.csv")
+p4 = pd.read_csv("predictions_4fold.csv")
+p5 = pd.read_csv("predictions_5fold.csv")
 predictions = pd.concat([p1, p2, p3, p4, p5], ignore_index=True)
 
 
